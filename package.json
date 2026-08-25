@@ -50,7 +50,7 @@
     "dependencies": {
         "@azure/identity": "~4.13.1",
         "openai": "~6.48.0",
-        "typia": "~12.1.1"
+        "typia": "~14.0.2"
     },
     "devDependencies": {
         "@azure/core-auth": "~1.11.0",
