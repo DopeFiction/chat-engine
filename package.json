@@ -45,10 +45,14 @@
         "lint": "eslint --max-warnings 0",
         "test:Unit": "echo \"No unit tests yet!\"",
         "test:Integration": "echo \"No integration tests yet!\"",
-        "prepare": "ts-patch install"
+        "prepare": "ts-patch install",
+        "mcp:off": "node bin/src/mcp/mcp-two-machine.js",
+        "mcp:stdio": "node --env-file=.env bin/src/mcp/mcp-two-machine.js --mcp-stdio",
+        "mcp:http": "node --env-file=.env bin/src/mcp/mcp-two-machine.js --mcp-http"
     },
     "dependencies": {
         "@azure/identity": "~4.13.1",
+        "@modelcontextprotocol/server": "^2.0.0",
         "openai": "~6.48.0",
         "typia": "~12.1.1"
     },
@@ -60,6 +64,7 @@
         "typescript": "~6.0.3"
     },
     "overrides": {
+        "brace-expansion": "5.0.9",
         "function-bind": "npm:@socketregistry/function-bind@^1",
         "hasown": "npm:@socketregistry/hasown@^1",
         "is-core-module": "npm:@socketregistry/is-core-module@^1",
