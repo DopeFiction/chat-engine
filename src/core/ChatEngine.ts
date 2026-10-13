@@ -93,6 +93,57 @@ export class ChatEngine {
 
     // #region Business Logic
 
+    public async invokeRegisteredPlugin(
+        pluginId: string,
+        uniqueProps: Record<string, unknown>,
+        commonMetadata: CommonMetadata
+    ): Promise<string> {
+        assertGuardEquals(commonMetadata);
+
+        /**
+         * Defines plugin.
+         * Keeps the plugin used to register or invoke functionality.
+         */
+        const plugin = this.#plugins[pluginId];
+
+        // Check !plugin before choosing which behavior to run.
+        if (!plugin) {
+            throw new TypeError(
+                'The requested plugin is not registered with the chat engine.'
+            );
+        }
+
+        // Check plugin.requiredPermissionList.length !== 0 && !plugin.requiredPermissionList.every( (permission) =>  before choosing which behavior to run.
+        if (
+            plugin.requiredPermissionList.length !== 0 &&
+            !plugin.requiredPermissionList.every(
+                (permission) =>
+                    commonMetadata.permissionList.includes(
+                        permission
+                    )
+            )
+        ) {
+            throw new TypeError(
+                'The caller does not have permission to invoke this plugin.'
+            );
+        }
+
+        /**
+         * Defines common props.
+         * Stores common props for use in the surrounding operation.
+         */
+        const commonProps: CommonCallbackProps = {
+            ...commonMetadata,
+            'chatEngine': this,
+            'vectorDb': this.#vectorDb
+        };
+
+        return plugin.callback(
+            commonProps,
+            uniqueProps
+        );
+    }
+
     /**
      * Registers the provided plugin within the Chat Engine.
      * @param plugin Plugin that is to be registered with the Chat Engine.
