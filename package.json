@@ -43,25 +43,24 @@
         "prebuild:Prod": "tsc -p prod.tsconfig.json --emitDeclarationOnly false",
         "build:Prod": "tsc -p prod.tsconfig.json --removeComments false",
         "lint": "eslint --max-warnings 0",
-        "test:Unit": "echo \"No unit tests yet!\"",
-        "test:Integration": "echo \"No integration tests yet!\"",
-        "prepare": "ts-patch install",
-        "mcp:off": "node bin/src/mcp/mcp-two-machine.js",
-        "mcp:stdio": "node --env-file=.env bin/src/mcp/mcp-two-machine.js --mcp-stdio",
-        "mcp:http": "node --env-file=.env bin/src/mcp/mcp-two-machine.js --mcp-http"
+        "mcp:http": "node --env-file=.env bin/src/mcp/mcp-two-machine.js --mcp-http",
+        "prepare": "ts-patch install"
     },
     "dependencies": {
         "@azure/identity": "~4.13.3",
+        "@modelcontextprotocol/express": "^2.0.2",
+        "@modelcontextprotocol/node": "^2.1.1",
         "@modelcontextprotocol/server": "^2.3.1",
         "openai": "~7.32.0",
-        "typia": "~15.1.0"
+        "typia": "~12.1.1"
     },
     "devDependencies": {
         "@azure/core-auth": "~1.11.0",
         "@software-hardware-integration-lab/development-utilities": "~3.0.0",
+        "@types/express": "^5.0.6",
         "@types/node": "~26.6.5",
         "ts-patch": "~4.0.1",
-        "typescript": "~7.0.2"
+        "typescript": "~6.0.3"
     },
     "overrides": {
         "brace-expansion": "5.0.12",
