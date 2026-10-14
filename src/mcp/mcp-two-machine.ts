@@ -2,29 +2,16 @@ import { ChatEngine } from '../core/ChatEngine.js';
 import { pluginSearchRagCosineSimilarity } from '../core/plugins/rag.js';
 import { serveChatEngineMcpHttp } from './index.js';
 
-// Node.js loads the .env file from the current working directory at startup.
-/**
- * Defines chat host.
- * Stores the configured chat host used to connect to the model or service.
- */
+/** The configured chat host used to connect to the model or service. */
 const chatHost = process.env['CHAT_BASE_URL'];
 
-/**
- * Defines embeddings host.
- * Stores the configured embeddings host used to connect to the model or service.
- */
+/** The configured embeddings host used to connect to the model or service.*/
 const embeddingsHost = process.env['EMBEDDINGS_BASE_URL'];
 
-/**
- * Defines chat model.
- * Identifies the chat model to use for model requests.
- */
+/** The chat model to use for model requests. */
 const chatModel = process.env['CHAT_MODEL'];
 
-/**
- * Defines embedding model.
- * Identifies the embedding model to use for model requests.
- */
+/** The embedding model to use for model request */
 const embeddingModel = process.env['EMBEDDINGS_MODELS'];
 
 /** The chat api key supplied to the API client for authentication. */
@@ -34,8 +21,7 @@ const chatApiKey = process.env['CHAT_API_KEY'] ?? 'none';
 const embeddingsApiKey = process.env['EMBEDDINGS_API_KEY'] ?? 'none';
 
 /** Flag that indicates whether use mcp http is enabled or permitted. */
-const useMcpHttp =
-    process.argv.includes('--mcp-http');
+const useMcpHttp = process.argv.includes('--mcp-http');
 
 /** Ensure that an Ollama/OpenAI-compatible host was configured before creating Chat Engine. */
 if (!chatHost || !embeddingsHost) { throw new Error('CHAT_BASE_URL and EMBEDDINGS_BASE_URL are required'); }
