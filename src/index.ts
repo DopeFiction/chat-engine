@@ -22,11 +22,11 @@ export { pluginGetDateTime } from './core/plugins/utility.js';
 // #endregion Plugins
 
 // #region Types
-
-// Export the types used in the Chat Engine for type safety and clarity.
 export type { CommonMetadata, ConversationConfig, EmbeddingResult, EmbeddingsConfig } from './types/ChatEngine.js';
 
-// Export the types related to plugins authorship for type safety and clarity.
 export type { ChatEnginePluginConfig, CommonCallbackProps, PluginGroup } from './types/Plugin.js';
 
 // #endregion Types
+export { serveChatEngineMcpHttp, createMcpPluginServer } from './mcp/index.js';
+
+export type { McpHttpConfig, McpPluginArgs, McpPluginBridgeConfig } from './mcp/index.js';
