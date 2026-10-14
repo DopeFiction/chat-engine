@@ -93,6 +93,13 @@ export class ChatEngine {
 
     // #region Business Logic
 
+    /**
+     * Handles invoke registered plugin as part of the module's workflow.
+     * @param pluginId - Provides the plugin id used to register or invoke functionality.
+     * @param uniqueProps - Provides unique props for use in the surrounding operation.
+     * @param commonMetadata - Provides common metadata for use in the surrounding operation.
+     * @returns The result of the operation, or a promise when the work is asynchronous.
+     */
     public async invokeRegisteredPlugin(
         pluginId: string,
         uniqueProps: Record<string, unknown>,
@@ -108,24 +115,15 @@ export class ChatEngine {
 
         // Check !plugin before choosing which behavior to run.
         if (!plugin) {
-            throw new TypeError(
-                'The requested plugin is not registered with the chat engine.'
-            );
+            throw new TypeError('The requested plugin is not registered with the chat engine.');
         }
 
         // Check plugin.requiredPermissionList.length !== 0 && !plugin.requiredPermissionList.every( (permission) =>  before choosing which behavior to run.
         if (
             plugin.requiredPermissionList.length !== 0 &&
-            !plugin.requiredPermissionList.every(
-                (permission) =>
-                    commonMetadata.permissionList.includes(
-                        permission
-                    )
-            )
+            !plugin.requiredPermissionList.every((permission) => commonMetadata.permissionList.includes(permission))
         ) {
-            throw new TypeError(
-                'The caller does not have permission to invoke this plugin.'
-            );
+            throw new TypeError('The caller does not have permission to invoke this plugin.');
         }
 
         /**
